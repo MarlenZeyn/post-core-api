@@ -1,4 +1,5 @@
 package com.example.coreapipostoffice.model;
+import java.lang.*;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

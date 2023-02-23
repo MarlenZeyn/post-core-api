@@ -4,6 +4,7 @@ import com.example.coreapipostoffice.model.PostOffice;
 import com.example.coreapipostoffice.service.PostOfficeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,17 @@ public class PostOfficeController {
     @Autowired
     private PostOfficeService postOfficeService;
 
+    @Autowired
+    Environment env;
 
-    @PostMapping("/post")
+   @GetMapping("/check")
+    public String check(){
+        return "postoffice-core-api is working at the port" + env.getProperty("local.server.port");
+
+    }
+
+
+    @PostMapping("/postsend")
     public ResponseEntity<String> sendPost(@Valid @PathVariable PostOffice postOffice) {
         postOfficeService.sendPost(postOffice);
         return new ResponseEntity<String>("U send post", HttpStatus.OK);
